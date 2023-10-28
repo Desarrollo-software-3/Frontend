@@ -42,6 +42,7 @@ import BillingInformation from "layouts/billing/components/BillingInformation";
 import Transactions from "layouts/billing/components/Transactions";
 import { useState } from "react";
 
+
  const evento = {
     imagen: "",
     titulo: "",
@@ -57,7 +58,7 @@ import { useState } from "react";
 
 function CreateP() {
 
-  const [imagen, setImagen] = useState('hgj');
+  const [imagen, setImagen] = useState('https://gogocatrina.com/wp-content/uploads/2023/10/Fallout-de-Prime-Video-400x256@2x.jpg');
   const [titulo, setTitulo] = useState('');
   const [ubicacion, setUbicacion] = useState('');
   const [fechaInicio, setFechaInicio] = useState('');
@@ -66,7 +67,7 @@ function CreateP() {
   const [cantidadBoletos, setCantidadBoletos] = useState(0);
   const [descripcion, setDescripcion] = useState('');
   const creacionF = new Date();
-
+  const creacionFS = new Date();
   const handleImagenChange = (e) => {
     setImagen(e.target.value);
   };
@@ -101,6 +102,7 @@ function CreateP() {
 
   
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     
     axios.post("http://localhost:4000/api/proyect", {imagen, 
@@ -123,6 +125,7 @@ function CreateP() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
+
       <SoftBox component="form" role="form">
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5} >
@@ -154,7 +157,7 @@ function CreateP() {
               Fecha de fin
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="fechaF" placeholder="Fecha de fin" onChange = {handleFechaFinChange} />
+          <SoftInput type="fechaF" placeholder="Fechac  de fin" onChange = {handleFechaFinChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
