@@ -69,8 +69,21 @@ function CreateP() {
   const creacionF = new Date();
   const creacionFS = new Date();
   const handleImagenChange = (e) => {
-    setImagen(e.target.value);
+    const file = e.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = function (e) {
+        const imageUrl = e.target.result;
+        console.log("URL generada:", imageUrl);
+        setImagen(imageUrl); // Actualiza el estado de "imagen" con la nueva URL
+      };
+  
+      reader.readAsDataURL(file);
+    }
   };
+  
   
   const handleTituloChange = (e) => {
     setTitulo(e.target.value);
@@ -102,7 +115,7 @@ function CreateP() {
 
   
   const handleSubmit = async (e) => {
-    
+    console.log(imagen)
     e.preventDefault();
     
     axios.post("http://localhost:4000/api/proyect", {imagen, 
@@ -183,7 +196,9 @@ function CreateP() {
           </SoftBox>
           <SoftInput type="descripcion" placeholder="Descripcion" onChange = {handleDescripcionChange} />
         </SoftBox>
-        
+        <SoftBox mb={2}>
+          <input type="file" placeholder="image" onChange = {handleImagenChange} />
+        </SoftBox>
           <SoftButton variant="gradient" color="dark" onClick={handleSubmit}>
             <Icon sx={{ fontWeight: "bold" }}>add</Icon>
                   &nbsp;Crear proyecto
