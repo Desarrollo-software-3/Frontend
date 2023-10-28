@@ -1,16 +1,5 @@
 /**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+Eventos Creados 
 */
 
 // @mui material components
@@ -41,21 +30,69 @@ import PlatformSettings from "layouts/profile/components/PlatformSettings";
 // Data
 import profilesListData from "layouts/profile/data/profilesListData";
 
-// Images
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+
+
+import React, { useEffect, useState } from "react";
+
+
 
 function Overview() {
+  const [eventos, setEventos] = useState([]);
+  const formatDate = (dateStr) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('es-ES', options);
+  };
+  useEffect(() => {
+    // Realizar la solicitud GET al servidor para obtener la lista de eventos
+    fetch("http://localhost:4000/eventoscreados") // Asegúrate de usar la URL correcta
+      .then((response) => response.json())
+      .then((data) => {
+        // Los datos de eventos se almacenan en el estado
+        setEventos(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener la lista de eventos:", error);
+      });
+  }, []);
+
+  const eliminarEvento = (eventoId) => {
+    // Deshabilitar el icono para evitar clics múltiples
+    const icono = document.getElementById('iconoEliminarEvento');
+    icono.setAttribute('disabled', true);
+  
+    // Mostrar una alerta de confirmación
+    const confirmarEliminar = window.confirm('¿Está seguro de eliminar este evento?');
+  
+    if (confirmarEliminar) {
+      // Si el usuario confirma la eliminación, enviar la solicitud DELETE
+      fetch(`/eventos/${eventoId}`, { method: 'DELETE' })
+        .then((response) => response.json())
+        .then((data) => {
+          // Mostrar un mensaje de éxito o realizar otras acciones necesarias
+          alert(data.msg);
+          // Recargar la página para reflejar los cambios
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error(error);
+          // Mostrar un mensaje de error o realizar otras acciones necesarias en caso de error
+        })
+        .finally(() => {
+          // Habilitar nuevamente el icono después de completar la solicitud
+          icono.removeAttribute('disabled');
+        });
+    } else {
+      // Habilitar nuevamente el icono si el usuario cancela la eliminación
+      icono.removeAttribute('disabled');
+    }
+  };
+
   return (
     <DashboardLayout>
       <Header />
       <SoftBox mt={5} mb={3}>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           <Grid item xs={12} md={6} xl={4}>
             <PlatformSettings />
           </Grid>
@@ -95,88 +132,49 @@ function Overview() {
         </Grid>
       </SoftBox>
       <SoftBox mb={3}>
-        <Card>
-          <SoftBox pt={2} px={2}>
-            <SoftBox mb={0.5}>
-              <SoftTypography variant="h6" fontWeight="medium">
-                Projects
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mb={1}>
-              <SoftTypography variant="button" fontWeight="regular" color="text">
-                Architects design houses
-              </SoftTypography>
-            </SoftBox>
-          </SoftBox>
-          <SoftBox p={2}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor1}
-                  label="project #2"
-                  title="modern"
-                  description="As Uber works through a huge amount of internal management turmoil."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor2}
-                  label="project #1"
-                  title="scandinavian"
-                  description="Music is something that every person has his or her own specific opinion about."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor3}
-                  label="project #3"
-                  title="minimalist"
-                  description="Different people have different taste, and various types of music."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team4, name: "Peterson" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team1, name: "Elena Morison" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <PlaceholderCard title={{ variant: "h5", text: "New project" }} outlined />
-              </Grid>
-            </Grid>
-          </SoftBox>
-        </Card>
+  <Card>
+    <SoftBox pt={2} px={2}>
+      <SoftBox mb={3}> {/* Estableciendo un margen común para todos los SoftBox dentro */}
+        <SoftTypography variant="h6" fontWeight="medium">
+          Projects
+        </SoftTypography>
       </SoftBox>
+      <SoftBox mb={3}> {/* Estableciendo un margen común para todos los SoftBox dentro */}
+        <SoftTypography variant="button" fontWeight="regular" color="text">
+          Architects design houses
+        </SoftTypography>
+      </SoftBox>
+    </SoftBox>
+
+    <SoftBox mb={3}> {/* Estableciendo un margen común para todos los elementos dentro */}
+      <Grid container spacing={2}>
+        {eventos.map((evento, index) => (
+          <Grid item xs={12} md={6} xl={4} key={index}>
+            <DefaultProjectCard
+              image={evento.imagen}
+              label={`${evento.titulo}`}
+              title={formatDate(evento.creacionF)}
+              description={evento.precio}
+              lugar={evento.ubicacion}
+              action={{
+                type: 'internal',
+                route: '/pages/profile/profile-overview',
+                color: 'info',
+                label: 'view project',
+              }}
+              authors={evento.nombre}
+              ideEv={evento._id}
+            />
+          </Grid>
+        ))}
+        
+      </Grid><Grid item xs={12} md={6} xl={3}>
+          <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
+        </Grid>
+    </SoftBox>
+  </Card>
+</SoftBox>
+
 
       <Footer />
     </DashboardLayout>

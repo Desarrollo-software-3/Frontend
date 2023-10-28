@@ -23,7 +23,7 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
-
+import { Link } from "react-router-dom";
 function PlaceholderCard({ icon, title, hasBorder, outlined }) {
   return (
     <Card
@@ -35,6 +35,10 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
         border: hasBorder || outlined ? `${borderWidth[1]} solid ${borderColor}` : "none",
       })}
     >
+           
+
+<Link to={'/profile/createProyect'}>
+
       <SoftBox
         display="flex"
         flexDirection="column"
@@ -43,7 +47,7 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
         height="100%"
         p={3}
       >
-        <SoftBox color="secondary" mb={0.5}>
+        <SoftBox color="secondary" mb={3}>
           <Icon fontSize="default" sx={{ fontWeight: "bold" }}>
             {icon}
           </Icon>
@@ -52,6 +56,8 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
           {title.text}
         </SoftTypography>
       </SoftBox>
+      </Link>
+
     </Card>
   );
 }
@@ -59,7 +65,7 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
 // Setting default values for the props of PlaceholderCard
 PlaceholderCard.defaultProps = {
   icon: "add",
-  hasBorder: false,
+  hasBorder: true,
   outlined: false,
 };
 
