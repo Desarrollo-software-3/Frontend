@@ -19,7 +19,7 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 import { Icon } from "@mui/material";
 import axios from "axios";
-
+import input from "./input.css"
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
@@ -33,15 +33,11 @@ import SoftButton from "components/SoftButton";
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+
 
 // Billing page components
-import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
-import BillingInformation from "layouts/billing/components/BillingInformation";
-import Transactions from "layouts/billing/components/Transactions";
-import { useState } from "react";
 
+import { useState } from "react";
 
  const evento = {
     imagen: "",
@@ -55,10 +51,10 @@ import { useState } from "react";
     creacionF: new Date(),
   
   }
-
+ 
 function CreateP() {
 
-  const [imagen, setImagen] = useState('https://gogocatrina.com/wp-content/uploads/2023/10/Fallout-de-Prime-Video-400x256@2x.jpg');
+  const [imagen, setImagen] = useState('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg');
   const [titulo, setTitulo] = useState('');
   const [ubicacion, setUbicacion] = useState('');
   const [fechaInicio, setFechaInicio] = useState('');
@@ -69,8 +65,21 @@ function CreateP() {
   const creacionF = new Date();
   const creacionFS = new Date();
   const handleImagenChange = (e) => {
-    setImagen(e.target.value);
+    const file = e.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = function (e) {
+        const imageUrl = e.target.result;
+        console.log("URL generada:", imageUrl);
+        setImagen(imageUrl); // Actualiza el estado de "imagen" con la nueva URL
+      };
+  
+      reader.readAsDataURL(file);
+    }
   };
+  
   
   const handleTituloChange = (e) => {
     setTitulo(e.target.value);
@@ -102,7 +111,7 @@ function CreateP() {
 
   
   const handleSubmit = async (e) => {
-    
+    console.log(imagen)
     e.preventDefault();
     
     axios.post("http://localhost:4000/api/proyect", {imagen, 
@@ -123,10 +132,19 @@ function CreateP() {
     
       };
   return (
+
     <DashboardLayout>
       <DashboardNavbar />
-
-      <SoftBox component="form" role="form">
+      <div style={{
+        marginTop: '32px',
+        backgroundColor: 'white',
+        borderRadius: '32px',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <SoftBox component="form" role="form" style={{ display: 'flex' }}>
+              {/* Columna izquierda */}
+        <div style={{ flex: 1, paddingRight: '1rem' }}>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5} >
             <SoftTypography component="label" variant="caption" fontWeight="bold" >
@@ -141,23 +159,8 @@ function CreateP() {
               Ubicacion
             </SoftTypography>
           </SoftBox>
+      
           <SoftInput type="ubicacion" placeholder="ubicacion" onChange = {handleUbicacionChange} />
-        </SoftBox>
-        <SoftBox mb={2}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Fecha De Inicio
-            </SoftTypography>
-          </SoftBox>
-          <SoftInput type="FechaI" placeholder="Fecha de inicio" onChange = {handleFechaInicioChange} />
-        </SoftBox>
-        <SoftBox mb={2}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Fecha de fin
-            </SoftTypography>
-          </SoftBox>
-          <SoftInput type="fechaF" placeholder="Fechac  de fin" onChange = {handleFechaFinChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
@@ -178,18 +181,65 @@ function CreateP() {
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Fecha De Inicio
+            </SoftTypography>
+          </SoftBox>
+          <SoftInput type="date" placeholder="fechaI" onChange = {handleFechaInicioChange} />
+        </SoftBox>
+        </div>
+
+        {/* Columna derecha (para la imagen) */}
+        <div style={{ flex: 1, paddingLeft: '1rem' }}>
+           {/* Cuadro alrededor de la imagen */}
+           <div style={{
+              display: 'flex',
+              justifyContent: 'center', /* Centra horizontalmente */}}>
+           <div style={{ border: '2px solid #ccc', 
+           
+            borderRadius: '10px', 
+           marginTop: '16px', width: '300px', 
+           height: '300px'  }}>
+            
+           <img src= {imagen}
+           style={{ width: '100%', height: '100%' }}/> 
+          </div>
+          </div>
+          <SoftBox mb={3} style={{display: 'flex',
+              justifyContent: 'center'}}>
+              <input type="file" placeholder="image" onChange={handleImagenChange}  className="input-file-hidden" id="archivo"
+              />
+              <SoftTypography component="label" fontWeight="bold" htmlFor="archivo" variant="h6" className="subirArch" color="white">
+              <Icon sx={{ verticalAlign: '-2px' }}>upload</Icon>
+              &nbsp;Seleccionar archivo</SoftTypography>
+            </SoftBox>
+        <SoftBox mb={2}>
+          <SoftBox mb={1} ml={0.5}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold" >
+              Fecha de fin
+            </SoftTypography>
+          </SoftBox>
+          <SoftInput type="date" placeholder="fechaF" onChange = {handleFechaFinChange} />
+        </SoftBox>
+        </div>
+        
+        </SoftBox>
+        <SoftBox component="form" role="form" >
+       
+       
+        <SoftBox mb={2}>
+          <SoftBox mb={1} ml={0.5}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
               Descripcion
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="descripcion" placeholder="Descripcion" onChange = {handleDescripcionChange} />
+          <SoftInput type="descripcion" placeholder="Descripcion" onChange = {handleDescripcionChange}  />
         </SoftBox>
-        
           <SoftButton variant="gradient" color="dark" onClick={handleSubmit}>
             <Icon sx={{ fontWeight: "bold" }}>add</Icon>
                   &nbsp;Crear proyecto
         </SoftButton>
       </SoftBox>
-    
+    </div>
     </DashboardLayout>
   );
 }
