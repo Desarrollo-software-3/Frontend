@@ -76,9 +76,11 @@ function SignIn() {
           }else{
             setError("  " +userData.id.toString() +" noadmon")
           }
+          alert(data.message)
         } else if (data.error) {
           // Autenticación fallida, muestra un mensaje de error
-          alert('Credenciales malas')
+          alert('Credenciales erroneas')
+          alert(data.message)
         }
       })
       .catch(error => {
