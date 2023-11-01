@@ -60,6 +60,7 @@ import SpaceShip from "examples/Icons/SpaceShip";
 import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
+import Cart from "layouts/cart";
 
 const routes = [
   {
@@ -126,6 +127,16 @@ const routes = [
     component: <CreateP />,
     noCollapse: true,
   },
+  {
+    type:"collapse",
+    name:"Cart",
+    key:"cart",
+    route:"/cart",
+    icon:<CustomerSupport size="12px" />,
+    component:<Cart/>,
+    noCollapse:true,
+  }
+  ,
   {
     type: "collapse",
     name: "Recu",
