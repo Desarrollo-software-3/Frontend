@@ -32,15 +32,11 @@ import SoftTypography from "components/SoftTypography";
 // Soft UI Dashboard React base styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
-<<<<<<< HEAD
+
 import SoftButton from "components/SoftButton";
 import { Button } from "@mui/material";
 
 function ProfileInfoCard({ title,email2 ,description, info, social, action }) {
-=======
-
-function ProfileInfoCard({ title, description, info, social, action }) {
->>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
   const labels = [];
   const values = [];
   const { socialMediaColors } = colors;
@@ -98,7 +94,7 @@ function ProfileInfoCard({ title, description, info, social, action }) {
           {title}
         </SoftTypography>
         <SoftTypography component={Link} to={action.route} variant="body2" color="secondary">
-<<<<<<< HEAD
+
 
 
   <SoftButton variant="text" color="dark">
@@ -107,11 +103,7 @@ function ProfileInfoCard({ title, description, info, social, action }) {
       </Link>
     </SoftButton>
 
-=======
-          <Tooltip title={action.tooltip} placement="top">
-            <Icon>edit</Icon>
-          </Tooltip>
->>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
+
         </SoftTypography>
       </SoftBox>
       <SoftBox p={2}>
@@ -140,10 +132,9 @@ function ProfileInfoCard({ title, description, info, social, action }) {
 // Typechecking props for the ProfileInfoCard
 ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
-<<<<<<< HEAD
+
   email2 : PropTypes.objectOf(PropTypes.string).isRequired,
-=======
->>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
+
   description: PropTypes.string.isRequired,
   info: PropTypes.objectOf(PropTypes.string).isRequired,
   social: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -151,10 +142,7 @@ ProfileInfoCard.propTypes = {
     route: PropTypes.string.isRequired,
     tooltip: PropTypes.string.isRequired,
   }).isRequired,
-<<<<<<< HEAD
- 
-=======
->>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
+
 };
 
 export default ProfileInfoCard;

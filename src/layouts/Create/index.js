@@ -33,11 +33,9 @@ import SoftButton from "components/SoftButton";
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-<<<<<<< HEAD
-import Editar from "layouts/Editar";
-=======
 
->>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
+import Editar from "layouts/Editar";
+
 
 // Billing page components
 
