@@ -24,6 +24,7 @@ import Icon from "@mui/material/Icon";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import CardMedia from "@mui/material/CardMedia";
 function PlaceholderCard({ icon, title, hasBorder, outlined }) {
   return (
@@ -51,6 +52,19 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
           }}
         />
       </SoftBox>
+=======
+function PlaceholderCard({ icon, title, hasBorder, outlined }) {
+  return (
+    <Card
+      raised
+      sx={({ borders: { borderWidth, borderColor } }) => ({
+        height: "100%",
+        backgroundColor: outlined && "transparent",
+        boxShadow: outlined && "none",
+        border: hasBorder || outlined ? `${borderWidth[1]} solid ${borderColor}` : "none",
+      })}
+    >
+>>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
            
 
 <Link to={'/profile/createProyect'}>
