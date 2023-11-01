@@ -34,7 +34,8 @@ import Icon from "@mui/material/Icon";
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
-function DefaultProjectCard({ image, label, title, description ,lugar, action ,ideEv}) {
+
+function DefaultProjectCard({ image, label, title, description ,lugar, action ,ideEv,evento}) {
 
   const eliminarEvento = (eventoId) => {
     // Deshabilitar el icono para evitar clics múltiples
@@ -151,8 +152,10 @@ function DefaultProjectCard({ image, label, title, description ,lugar, action ,i
   </Grid>
   <Grid item xs={6} md={6}>
     <SoftButton variant="text" color="dark">
-      <Link to={`/ruta-de-edicion/${ideEv}`}>
-        <Button>editar</Button>
+
+    <Link to={`/editar/${ideEv}`}>
+        <Button>editadr</Button>
+
       </Link>
     </SoftButton>
   </Grid>
@@ -194,6 +197,9 @@ DefaultProjectCard.propTypes = {
   }).isRequired,
   
   ideEv : PropTypes.string.isRequired,
+
+  evento: PropTypes.arrayOf(), // Lista de eventos
+
 };
 
 export default DefaultProjectCard;

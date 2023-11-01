@@ -33,7 +33,10 @@ import SoftTypography from "components/SoftTypography";
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 
-function ProfileInfoCard({ title, description, info, social, action }) {
+import SoftButton from "components/SoftButton";
+import { Button } from "@mui/material";
+
+function ProfileInfoCard({ title,email2 ,description, info, social, action }) {
   const labels = [];
   const values = [];
   const { socialMediaColors } = colors;
@@ -91,9 +94,16 @@ function ProfileInfoCard({ title, description, info, social, action }) {
           {title}
         </SoftTypography>
         <SoftTypography component={Link} to={action.route} variant="body2" color="secondary">
-          <Tooltip title={action.tooltip} placement="top">
-            <Icon>edit</Icon>
-          </Tooltip>
+
+
+
+  <SoftButton variant="text" color="dark">
+    <Link to={`/editarp/${email2}`}>
+        <Button>Editar</Button>
+      </Link>
+    </SoftButton>
+
+
         </SoftTypography>
       </SoftBox>
       <SoftBox p={2}>
@@ -122,6 +132,9 @@ function ProfileInfoCard({ title, description, info, social, action }) {
 // Typechecking props for the ProfileInfoCard
 ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
+
+  email2 : PropTypes.objectOf(PropTypes.string).isRequired,
+
   description: PropTypes.string.isRequired,
   info: PropTypes.objectOf(PropTypes.string).isRequired,
   social: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -129,6 +142,7 @@ ProfileInfoCard.propTypes = {
     route: PropTypes.string.isRequired,
     tooltip: PropTypes.string.isRequired,
   }).isRequired,
+
 };
 
 export default ProfileInfoCard;
