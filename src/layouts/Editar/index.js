@@ -33,39 +33,55 @@ import SoftButton from "components/SoftButton";
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-<<<<<<< HEAD
-import Editar from "layouts/Editar";
-=======
+import { useState, useEffect, useMemo } from "react";
 
->>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
 
 // Billing page components
 
-import { useState } from "react";
 
- const evento = {
-    imagen: "",
-    titulo: "",
-    ubicacion: "",
-    fechaInicio: "",
-    fechaFin: "",
-    precio: 0,
-    cantidadBoletos: 0,
-    descipcion: "",
-    creacionF: new Date(),
-  
-  }
+import { BrowserRouter as Router, Route, Switch, useParams } from 'react-router-dom';
+
  
-function CreateP() {
+function Editar() {
+  
+  let { id } = useParams();
+  console.log(id);
+  const [eventos, setEventos] = useState([]);
+  
+  useEffect(() => {
+    fetch(`http://localhost:4000/eventT/${id}`) // Utiliza la interpolación para incluir el ID dinámicamente
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Corrección en el uso de console.log
+        setEventos(data); // Asegúrate de descomentar esta línea para almacenar los datos en el estado
+      })
+      .catch((error) => {
+        console.error("Error al obtener el evento:", error);
+      });
+  }, [id]); // Asegúrate de incluir `id` como dependencia en useEffect para que se ejecute cada vez que cambie el ID
+  console.log(eventos); // Corrección en el uso de console.log
 
-  const [imagen, setImagen] = useState('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg');
-  const [titulo, setTitulo] = useState('');
-  const [ubicacion, setUbicacion] = useState('');
-  const [fechaInicio, setFechaInicio] = useState('');
-  const [fechaFin, setFechaFin] = useState('');
-  const [precio, setPrecio] = useState(0);
-  const [cantidadBoletos, setCantidadBoletos] = useState(0);
-  const [descripcion, setDescripcion] = useState('');
+  const [imagen, setImagen] = useState();
+  const [titulo, setTitulo] = useState();
+  const [ubicacion, setUbicacion] = useState();
+  const [fechaInicio, setFechaInicio] = useState();
+  const [fechaFin, setFechaFin] = useState();
+  const [precio, setPrecio] = useState();
+  const [cantidadBoletos, setCantidadBoletos] = useState();
+  const [descripcion, setDescripcion] = useState();
+  useEffect(() => {
+    if (eventos) {
+      setImagen(eventos.imagen);
+      setTitulo(eventos.titulo);
+      setUbicacion(eventos.ubicacion);
+      setFechaInicio(eventos.fechaInicio);
+      setFechaFin(eventos.fechaFin);
+      setPrecio(eventos.precio);
+      setCantidadBoletos(eventos.cantidadBoletos);
+      setDescripcion(eventos.descripcion);
+    }
+  }, [eventos]);
+  
   const creacionF = new Date();
   const creacionFS = new Date();
   const handleImagenChange = (e) => {
@@ -83,6 +99,7 @@ function CreateP() {
       reader.readAsDataURL(file);
     }
   };
+ 
   
   
   const handleTituloChange = (e) => {
@@ -118,7 +135,7 @@ function CreateP() {
     console.log(imagen)
     e.preventDefault();
     
-    axios.post("http://localhost:4000/api/proyect", {imagen, 
+    axios.post(`http://localhost:4000/editar/${id}`, {imagen, 
     titulo, ubicacion,fechaInicio,fechaFin,precio,
     cantidadBoletos, descripcion, creacionF})
     .then(async () => {
@@ -135,6 +152,13 @@ function CreateP() {
 
     
       };
+    
+
+   
+
+    console.log(eventos)
+
+
   return (
 
     <DashboardLayout>
@@ -155,7 +179,7 @@ function CreateP() {
               Titulo
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="titulo" placeholder="Titulo" onChange = {handleTituloChange} />
+          <SoftInput type="titulo" placeholder={eventos.titulo} onChange = {handleTituloChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
@@ -164,7 +188,7 @@ function CreateP() {
             </SoftTypography>
           </SoftBox>
       
-          <SoftInput type="ubicacion" placeholder="ubicacion" onChange = {handleUbicacionChange} />
+          <SoftInput type="ubicacion" placeholder={eventos.ubicacion} onChange = {handleUbicacionChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
@@ -172,7 +196,7 @@ function CreateP() {
               Precio
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="precio" placeholder="Precio" onChange = {handlePrecioChange} />
+          <SoftInput type="precio" placeholder={id} onChange = {handlePrecioChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
@@ -180,7 +204,7 @@ function CreateP() {
               Boletos disponibles
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="boletos" placeholder="boletos" onChange = {handleCantidadBoletosChange} />
+          <SoftInput type="boletos" placeholder={eventos.cantidadBoletos} onChange = {handleCantidadBoletosChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
@@ -188,7 +212,7 @@ function CreateP() {
               Fecha De Inicio
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="date" placeholder="fechaI" onChange = {handleFechaInicioChange} />
+          <SoftInput type="date" placeholder={eventos.fechaInicio} onChange = {handleFechaInicioChange} />
         </SoftBox>
         </div>
 
@@ -222,7 +246,7 @@ function CreateP() {
               Fecha de fin
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="date" placeholder="fechaF" onChange = {handleFechaFinChange} />
+          <SoftInput type="date" placeholder={eventos.fechaFin} onChange = {handleFechaFinChange} />
         </SoftBox>
         </div>
         
@@ -244,8 +268,38 @@ function CreateP() {
         </SoftButton>
       </SoftBox>
     </div>
+    
     </DashboardLayout>
   );
 }
 
-export default CreateP;
+export default Editar;
+
+
+  /* CreateP2.propTypes = {
+ evento: PropTypes.arrayOf(
+        PropTypes.shape({
+          imagen: PropTypes.string,
+          titulo: PropTypes.string,
+          ubicacion: PropTypes.string,
+          fechaInicio: PropTypes.string,
+          fechaFin: PropTypes.string,
+          precio: PropTypes.number,
+          cantidadBoletos: PropTypes.number,
+          descripcion: PropTypes.string,
+          creacionF: PropTypes.instanceOf(Date),
+        })
+        
+      ),
+      evento: PropTypes.arrayOf(PropTypes.object).isRequired,*/
+
+   /* imagen2: PropTypes.string,
+    titulo2: PropTypes.string,
+    ubicacion2: PropTypes.string,
+    fechaInicio2: PropTypes.string,
+    fechaFin2: PropTypes.string,
+    precio2: PropTypes.number,
+    cantidadBoletos2: PropTypes.number,
+    descripcion2: PropTypes.string
+    
+  };,*/

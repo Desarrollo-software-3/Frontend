@@ -37,14 +37,22 @@ import Settings from "examples/Icons/Settings";
 
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
+import axios from 'axios';
+import React from 'react';
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import curved0 from "assets/images/curved-images/curved0.jpg";
+import PropTypes from 'prop-types'; // Importa PropTypes desde 'prop-types'
 
-function Header() {
+function Header(props) {
+  const lista = props.lista;
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
+  const [usu, setUsu] = useState({});
+
+  
+
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -54,6 +62,7 @@ function Header() {
         : setTabsOrientation("horizontal");
     }
 
+  
     /** 
      The event listener that's calling the handleTabsOrientation function when resizing the window.
     */
@@ -103,7 +112,7 @@ function Header() {
         <Grid container spacing={3} alignItems="center">
           <Grid item>
             <SoftAvatar
-              src={burceMars}
+              src={lista.foto2}
               alt="profile-image"
               variant="rounded"
               size="xl"
@@ -113,10 +122,10 @@ function Header() {
           <Grid item>
             <SoftBox height="100%" mt={0.5} lineHeight={1}>
               <SoftTypography variant="h5" fontWeight="medium">
-                Alex Thompson
+             @{ lista.nombre}
               </SoftTypography>
               <SoftTypography variant="button" color="text" fontWeight="medium">
-                CEO / Co-Founder
+              { lista.nombres}
               </SoftTypography>
             </SoftBox>
           </Grid>
@@ -139,5 +148,7 @@ function Header() {
     </SoftBox>
   );
 }
-
+Header.propTypes = {
+  lista: PropTypes.array.isRequired, // Validación para 'lista' como un array obligatorio
+};
 export default Header;
