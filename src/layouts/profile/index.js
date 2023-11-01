@@ -37,13 +37,17 @@ import React, { useEffect, useState } from "react";
 
 
 function Overview() {
+  const [editMode, setEditMode] = useState(false);
+  const [editedTitle, setEditedTitle] = useState();
+  
   const [eventos, setEventos] = useState([]);
+  const [usu, setUsu] = useState({});
   const formatDate = (dateStr) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(dateStr);
     return date.toLocaleDateString('es-ES', options);
   };
-  useEffect(() => {
+ useEffect(() => {
     // Realizar la solicitud GET al servidor para obtener la lista de eventos
     fetch("http://localhost:4000/eventoscreados") // Asegúrate de usar la URL correcta
       .then((response) => response.json())
@@ -55,6 +59,28 @@ function Overview() {
         console.error("Error al obtener la lista de eventos:", error);
       });
   }, []);
+ /**/
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/obtener_usuario/?correo=azteca.integrador@gmail.com")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos obtenidos:", data); // Verifica los datos obtenidos
+        setUsu(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener la lista de eventos:", error);
+      });
+  }, []);
+  
+
+
+
+
+
+
+
+
+
 
   const eliminarEvento = (eventoId) => {
     // Deshabilitar el icono para evitar clics múltiples
@@ -87,24 +113,30 @@ function Overview() {
       icono.removeAttribute('disabled');
     }
   };
+  
+
 
   return (
     <DashboardLayout>
-      <Header />
-      <SoftBox mt={5} mb={3}>
+      <Header  lista={usu}  />
+      <SoftBox mt={5} mb={2}>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={6} xl={4}>
+        {/*  <Grid item xs={12} md={6} xl={4}>
             <PlatformSettings />
-          </Grid>
+  </Grid>*/}
           <Grid item xs={12} md={6} xl={4}>
             <ProfileInfoCard
-              title="profile information"
-              description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
+              title="INFORMACION PERSONAL"
+              email = { usu.correo}
+              description="WELCOME"
               info={{
-                fullName: "Alec M. Thompson",
-                mobile: "(44) 123 1234 123",
-                email: "alecthompson@mail.com",
-                location: "USA",
+                fullName: `${usu.nombres} ${usu.apellidos}`,
+                TipoId : usu.tipoidentificacion,
+                numero : usu.numero,
+                mobile:`(57)${usu.telefono} `,
+                email: usu.correo,
+                location:  `📍${usu.ubicacion}` ,
+              
               }}
               social={[
                 {
@@ -124,11 +156,12 @@ function Overview() {
                 },
               ]}
               action={{ route: "", tooltip: "Edit Profile" }}
+             
             />
           </Grid>
-          <Grid item xs={12} xl={4}>
+         <Grid item xs={12} xl={4}>
             <ProfilesList title="conversations" profiles={profilesListData} />
-          </Grid>
+            </Grid> {/**/}
         </Grid>
       </SoftBox>
       <SoftBox mb={3}>
@@ -136,7 +169,7 @@ function Overview() {
     <SoftBox pt={2} px={2}>
       <SoftBox mb={3}> {/* Estableciendo un margen común para todos los SoftBox dentro */}
         <SoftTypography variant="h6" fontWeight="medium">
-          Projects
+          {usu.nombre}
         </SoftTypography>
       </SoftBox>
       <SoftBox mb={3}> {/* Estableciendo un margen común para todos los SoftBox dentro */}
@@ -164,13 +197,15 @@ function Overview() {
               }}
               authors={evento.nombre}
               ideEv={evento._id}
+              evento ={evento}
             />
           </Grid>
         ))}
-        
-      </Grid><Grid item xs={12} md={6} xl={3}>
+         <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
+
+      </Grid>{/*<Grid item xs={12} md={6} xl={3}>
           <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
-        </Grid>
+            </Grid>*/}
     </SoftBox>
   </Card>
 </SoftBox>

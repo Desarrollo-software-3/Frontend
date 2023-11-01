@@ -33,39 +33,109 @@ import SoftButton from "components/SoftButton";
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-<<<<<<< HEAD
-import Editar from "layouts/Editar";
-=======
+import { useState, useEffect, useMemo } from "react";
 
->>>>>>> 254842092ecc31cc6d0da80f2ee8321e51afce8d
 
 // Billing page components
 
-import { useState } from "react";
 
- const evento = {
-    imagen: "",
-    titulo: "",
-    ubicacion: "",
-    fechaInicio: "",
-    fechaFin: "",
-    precio: 0,
-    cantidadBoletos: 0,
-    descipcion: "",
-    creacionF: new Date(),
-  
-  }
+import { BrowserRouter as Router, Route, Switch, useParams } from 'react-router-dom';
+
  
-function CreateP() {
+function Editar2() {
+  
+  let { id } = useParams();
+  const [eventos, setEventos] = useState([]);
+  
+ 
 
-  const [imagen, setImagen] = useState('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg');
-  const [titulo, setTitulo] = useState('');
-  const [ubicacion, setUbicacion] = useState('');
-  const [fechaInicio, setFechaInicio] = useState('');
-  const [fechaFin, setFechaFin] = useState('');
-  const [precio, setPrecio] = useState(0);
-  const [cantidadBoletos, setCantidadBoletos] = useState(0);
-  const [descripcion, setDescripcion] = useState('');
+
+
+
+  const [usu, setUsu] = useState({});
+ 
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/obtener_usuario/?correo=azteca.integrador@gmail.com")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos obtenidos:", data); // Verifica los datos obtenidos
+        console.log(id)
+        setUsu(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener la lista de eventos:", error);
+      });
+  }, [id]);
+  
+
+
+ useEffect(() => {
+    fetch(`http://localhost:4000/eventT/${id}`) // Utiliza la interpolación para incluir el ID dinámicamente
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Corrección en el uso de console.log
+        setEventos(data); // Asegúrate de descomentar esta línea para almacenar los datos en el estado
+      })
+      .catch((error) => {
+        console.error("Error al obtener el evento:", error);
+      });
+  }, [id]); // Asegúrate de incluir `id` como dependencia en useEffect para que se ejecute cada vez que cambie el ID
+  console.log(eventos); // Corrección en el uso de console.log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const [imagen, setImagen] = useState();
+  const [nombre, setNombre] = useState();
+  const [ubicacion, setUbicacion] = useState();
+  const [fechaInicio, setFechaInicio] = useState();
+  const [fechaFin, setFechaFin] = useState();
+  const [precio, setPrecio] = useState();
+  const [cantidadBoletos, setCantidadBoletos] = useState();
+  const [descripcion, setDescripcion] = useState();
+  useEffect(() => {
+    if (eventos) {
+      setImagen(usu.foto2);
+      setNombre(usu.nombres);
+      setUbicacion(eventos.ubicacion);
+      setFechaInicio(eventos.fechaInicio);
+      setFechaFin(eventos.fechaFin);
+      setPrecio(usu.telefono);
+      setCantidadBoletos(eventos.cantidadBoletos);
+      setDescripcion(eventos.descripcion);
+    }
+  }, [usu]);
+  /*
+
+
+ 'nombre': usuario.nombre_usuario,
+                'correo': usuario.correo_electronico,
+                'foto2': usuario.foto2,
+                'nombres': usuario.nombres,
+                'apellidos': usuario.apellidos,
+                'tipoidentificacion': usuario.tipo_identificacion,
+                'numero': usuario.numero_identificacion,
+                'fecha_nacimiento': usuario.fecha_nacimiento,
+                'telefono': usuario.telefono,
+                'ubicacion': usuario.ubicacion
+  */
   const creacionF = new Date();
   const creacionFS = new Date();
   const handleImagenChange = (e) => {
@@ -83,10 +153,11 @@ function CreateP() {
       reader.readAsDataURL(file);
     }
   };
+ 
   
   
   const handleTituloChange = (e) => {
-    setTitulo(e.target.value);
+    setNombre(e.target.value);
   };
   
   const handleUbicacionChange = (e) => {
@@ -118,23 +189,37 @@ function CreateP() {
     console.log(imagen)
     e.preventDefault();
     
-    axios.post("http://localhost:4000/api/proyect", {imagen, 
-    titulo, ubicacion,fechaInicio,fechaFin,precio,
-    cantidadBoletos, descripcion, creacionF})
-    .then(async () => {
-      // Manejo de errores en caso de que falle la solicitud al backend
-      alert("registrado correctamente");
-     // window.location.href = "/contact";
-
+    fetch("http://127.0.0.1:8000/actualiazar_usuario/", {
+      method: 'POST',
+      body: JSON.stringify({
+        correo: 'azteca.integrador@gmail.com',  // Asegúrate de incluir el correo aquí
+        nuevo_nombre: 'Nuevo nombre',
+        nueva_foto2: 'Nueva foto2',
+        nuevos_nombres: 'Nuevos nombres',
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
-    .catch(async (error) => {
-      console.log(error);
-      // Manejo de errores en caso de que falle la solicitud al backend
-      alert("Ocurrió un error. Por favor, intenta nuevamente más tarde.");
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Datos obtenidos:", data);
+    })
+    .catch((error) => {
+      console.error("Error al actualizar el usuario:", error);
     });
+    
+    
 
     
       };
+    
+
+   
+
+    
+
+
   return (
 
     <DashboardLayout>
@@ -152,44 +237,29 @@ function CreateP() {
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5} >
             <SoftTypography component="label" variant="caption" fontWeight="bold" >
-              Titulo
+              Usuario
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="titulo" placeholder="Titulo" onChange = {handleTituloChange} />
+          <SoftInput type="titulo" placeholder={usu.nombre} onChange = {handleTituloChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Ubicacion
+              Nombre
             </SoftTypography>
           </SoftBox>
       
-          <SoftInput type="ubicacion" placeholder="ubicacion" onChange = {handleUbicacionChange} />
+          <SoftInput type="ubicacion" placeholder={usu.nombres} onChange = {handleUbicacionChange} />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Precio
+              Apellido
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="precio" placeholder="Precio" onChange = {handlePrecioChange} />
+          <SoftInput type="precio" placeholder={usu.apellidos} onChange = {handlePrecioChange} />
         </SoftBox>
-        <SoftBox mb={2}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Boletos disponibles
-            </SoftTypography>
-          </SoftBox>
-          <SoftInput type="boletos" placeholder="boletos" onChange = {handleCantidadBoletosChange} />
-        </SoftBox>
-        <SoftBox mb={2}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Fecha De Inicio
-            </SoftTypography>
-          </SoftBox>
-          <SoftInput type="date" placeholder="fechaI" onChange = {handleFechaInicioChange} />
-        </SoftBox>
+       
         </div>
 
         {/* Columna derecha (para la imagen) */}
@@ -216,36 +286,52 @@ function CreateP() {
               <Icon sx={{ verticalAlign: '-2px' }}>upload</Icon>
               &nbsp;Seleccionar archivo</SoftTypography>
             </SoftBox>
-        <SoftBox mb={2}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold" >
-              Fecha de fin
-            </SoftTypography>
-          </SoftBox>
-          <SoftInput type="date" placeholder="fechaF" onChange = {handleFechaFinChange} />
-        </SoftBox>
+         
         </div>
         
         </SoftBox>
         <SoftBox component="form" role="form" >
        
        
-        <SoftBox mb={2}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Descripcion
-            </SoftTypography>
-          </SoftBox>
-          <SoftInput type="descripcion" placeholder="Descripcion" onChange = {handleDescripcionChange}  />
-        </SoftBox>
+       
           <SoftButton variant="gradient" color="dark" onClick={handleSubmit}>
             <Icon sx={{ fontWeight: "bold" }}>add</Icon>
-                  &nbsp;Crear proyecto
+                  &nbsp;Editar
         </SoftButton>
       </SoftBox>
     </div>
+    
     </DashboardLayout>
   );
 }
 
-export default CreateP;
+export default Editar2;
+
+
+  /* CreateP2.propTypes = {
+ evento: PropTypes.arrayOf(
+        PropTypes.shape({
+          imagen: PropTypes.string,
+          titulo: PropTypes.string,
+          ubicacion: PropTypes.string,
+          fechaInicio: PropTypes.string,
+          fechaFin: PropTypes.string,
+          precio: PropTypes.number,
+          cantidadBoletos: PropTypes.number,
+          descripcion: PropTypes.string,
+          creacionF: PropTypes.instanceOf(Date),
+        })
+        
+      ),
+      evento: PropTypes.arrayOf(PropTypes.object).isRequired,*/
+
+   /* imagen2: PropTypes.string,
+    titulo2: PropTypes.string,
+    ubicacion2: PropTypes.string,
+    fechaInicio2: PropTypes.string,
+    fechaFin2: PropTypes.string,
+    precio2: PropTypes.number,
+    cantidadBoletos2: PropTypes.number,
+    descripcion2: PropTypes.string
+    
+  };,*/
