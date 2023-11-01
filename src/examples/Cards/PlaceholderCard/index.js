@@ -23,18 +23,40 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import { Link } from "react-router-dom";
 
+import CardMedia from "@mui/material/CardMedia";
 function PlaceholderCard({ icon, title, hasBorder, outlined }) {
   return (
     <Card
-      raised
-      sx={({ borders: { borderWidth, borderColor } }) => ({
-        height: "100%",
-        backgroundColor: outlined && "transparent",
-        boxShadow: outlined && "none",
-        border: hasBorder || outlined ? `${borderWidth[1]} solid ${borderColor}` : "none",
-      })}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "transparent",
+        boxShadow: "none",
+        overflow: "visible",
+      }}
     >
+      <SoftBox position="relative" width="400px" shadow="xs" borderRadius="xl">
+        <CardMedia
+          src={'https://us.123rf.com/450wm/sumberejeki/sumberejeki2007/sumberejeki200703075/151819268-vectores-gr%C3%A1fico-vectorial-del-icono-de-la-barra-de-carga-apto-para-el-progreso-la-interfaz-el.jpg?ver=6'}
+          component="img"
+          title={''}
+          sx={{
+            maxWidth: "300px",
+            maxHeight :"400px",
+            margin: 0,
+            boxShadow: ({ boxShadows: { md } }) => md,
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+      </SoftBox>
+
+           
+
+<Link to={'/profile/createProyect'}>
+
       <SoftBox
         display="flex"
         flexDirection="column"
@@ -43,7 +65,7 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
         height="100%"
         p={3}
       >
-        <SoftBox color="secondary" mb={0.5}>
+        <SoftBox color="secondary" mb={3}>
           <Icon fontSize="default" sx={{ fontWeight: "bold" }}>
             {icon}
           </Icon>
@@ -52,6 +74,8 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
           {title.text}
         </SoftTypography>
       </SoftBox>
+      </Link>
+
     </Card>
   );
 }
@@ -59,7 +83,7 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
 // Setting default values for the props of PlaceholderCard
 PlaceholderCard.defaultProps = {
   icon: "add",
-  hasBorder: false,
+  hasBorder: true,
   outlined: false,
 };
 

@@ -45,8 +45,12 @@ import Profile from "layouts/profile";
 import CreateP from "layouts/Create";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+
 import PasswordRecovery from "layouts/authentication/password-recovery";
 
+
+import Editar from "layouts/Editar";
+import Editar2 from "layouts/EditarP";
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
 import Office from "examples/Icons/Office";
@@ -149,6 +153,24 @@ const routes = [
     component: <SignUp />,
     noCollapse: true,
   },
+  {
+    
+    
+    route: "/editar/:id",
+    icon: <SpaceShip size="12px" />,
+    component: <Editar />,
+    noCollapse: true,
+  },
+
+  {
+    
+    
+    route: "/editarp/:id",
+    icon: <SpaceShip size="12px" />,
+    component: <Editar2 />,
+    noCollapse: true,
+  },
+ 
 ];
 
 export default routes;

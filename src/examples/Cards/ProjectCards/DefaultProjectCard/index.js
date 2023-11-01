@@ -29,27 +29,46 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
 import SoftAvatar from "components/SoftAvatar";
+import React, { useEffect, useState } from "react";
+import Icon from "@mui/material/Icon";
+import { Button } from "@mui/material";
+import Grid from "@mui/material/Grid";
 
-function DefaultProjectCard({ image, label, title, description, action, authors }) {
-  const renderAuthors = authors.map(({ image: media, name }) => (
-    <Tooltip key={name} title={name} placement="bottom">
-      <SoftAvatar
-        src={media}
-        alt={name}
-        size="xs"
-        sx={({ borders: { borderWidth }, palette: { white } }) => ({
-          border: `${borderWidth[2]} solid ${white.main}`,
-          cursor: "pointer",
-          position: "relative",
-          ml: -1.25,
 
-          "&:hover, &:focus": {
-            zIndex: "10",
-          },
-        })}
-      />
-    </Tooltip>
-  ));
+function DefaultProjectCard({ image, label, title, description ,lugar, action ,ideEv,evento}) {
+
+  const eliminarEvento = (eventoId) => {
+    // Deshabilitar el icono para evitar clics múltiples
+    const icono = document.getElementById('iconoEliminarEvento');
+    icono.setAttribute('disabled', true);
+  
+    // Mostrar una alerta de confirmación
+    const confirmarEliminar = window.confirm('¿Está seguro de eliminar este evento?',eventoId);
+  
+    if (confirmarEliminar) {
+      // Si el usuario confirma la eliminación, enviar la solicitud DELETE
+      fetch(`http://localhost:4000/eventos/${eventoId}`, { method: 'DELETE' })
+        .then((response) => response.json())
+        .then((data) => {
+          // Mostrar un mensaje de éxito o realizar otras acciones necesarias
+          alert(data.msg);
+          // Recargar la página para reflejar los cambios
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error(error);
+          // Mostrar un mensaje de error o realizar otras acciones necesarias en caso de error
+        })
+        .finally(() => {
+          // Habilitar nuevamente el icono después de completar la solicitud
+          icono.removeAttribute('disabled');
+        });
+    } else {
+      // Habilitar nuevamente el icono si el usuario cancela la eliminación
+      icono.removeAttribute('disabled');
+    }
+  };
+
 
   return (
     <Card
@@ -61,13 +80,14 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
         overflow: "visible",
       }}
     >
-      <SoftBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
+      <SoftBox position="relative" width="400px" shadow="xs" borderRadius="xl">
         <CardMedia
           src={image}
           component="img"
           title={title}
           sx={{
-            maxWidth: "100%",
+            maxWidth: "400px",
+            maxHeight :"400px",
             margin: 0,
             boxShadow: ({ boxShadows: { md } }) => md,
             objectFit: "cover",
@@ -78,8 +98,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
       <SoftBox pt={3} px={0.5}>
         <SoftBox mb={1}>
           <SoftTypography
-            variant="button"
-            fontWeight="regular"
+            variant="h5"
             textTransform="capitalize"
             textGradient
           >
@@ -94,7 +113,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               variant="h5"
               textTransform="capitalize"
             >
-              {title}
+              { title}
             </SoftTypography>
           ) : (
             <SoftTypography
@@ -111,36 +130,39 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
         </SoftBox>
         <SoftBox mb={3} lineHeight={0}>
           <SoftTypography variant="button" fontWeight="regular" color="text">
-            {description}
+            Precio : {description}
           </SoftTypography>
+          
         </SoftBox>
-        <SoftBox display="flex" justifyContent="space-between" alignItems="center">
-          {action.type === "internal" ? (
-            <SoftButton
-              component={Link}
-              to={action.route}
-              variant="outlined"
-              size="small"
-              color={action.color}
-            >
-              {action.label}
-            </SoftButton>
-          ) : (
-            <SoftButton
-              component="a"
-              href={action.route}
-              target="_blank"
-              rel="noreferrer"
-              variant="outlined"
-              size="small"
-              color={action.color}
-            >
-              {action.label}
-            </SoftButton>
-          )}
-          <SoftBox display="flex">{renderAuthors}</SoftBox>
+
+        <SoftBox mb={1} lineHeight={0}>
+          <SoftTypography variant="button" fontWeight="regular" color="text">
+             {lugar}
+          </SoftTypography>
+          
         </SoftBox>
+        
+  <Grid container spacing={0.1}>
+  <Grid item xs={0} md={0}>
+    <SoftBox mr={0} p={0}>
+      <Button id="iconoEliminarEvento" color="secondary" onClick={() => eliminarEvento(ideEv)}>
+        delete
+      </Button>
+    </SoftBox>
+  </Grid>
+  <Grid item xs={6} md={6}>
+    <SoftButton variant="text" color="dark">
+
+    <Link to={`/editar/${ideEv}`}>
+        <Button>editadr</Button>
+
+      </Link>
+    </SoftButton>
+  </Grid>
+</Grid>
+        
       </SoftBox>
+      
     </Card>
   );
 }
@@ -156,6 +178,7 @@ DefaultProjectCard.propTypes = {
   label: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  lugar : PropTypes.string.isRequired,
   action: PropTypes.shape({
     type: PropTypes.oneOf(["external", "internal"]),
     route: PropTypes.string.isRequired,
@@ -172,7 +195,11 @@ DefaultProjectCard.propTypes = {
     ]).isRequired,
     label: PropTypes.string.isRequired,
   }).isRequired,
-  authors: PropTypes.arrayOf(PropTypes.object),
+  
+  ideEv : PropTypes.string.isRequired,
+
+  evento: PropTypes.arrayOf(), // Lista de eventos
+
 };
 
 export default DefaultProjectCard;
