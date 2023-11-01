@@ -15,8 +15,8 @@ function PasswordRecovery() {
   const [isCodeSubmitted, setIsCodeSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const resetPasswordURL = "http://localhost:8000/api/reset-password";
-  const sendEmailURL = "http://localhost:8000/api/send-email";
+  const resetPasswordURL = "http://localhost:4000/api/resetPasword";
+  const sendEmailURL = "http://localhost:4000/api/newPassword";
 
   const handleSubmitEmail = async (e) => {
     e.preventDefault();

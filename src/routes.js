@@ -45,6 +45,7 @@ import Profile from "layouts/profile";
 import CreateP from "layouts/Create";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import PasswordRecovery from "layouts/authentication/password-recovery";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -119,6 +120,15 @@ const routes = [
     route: "/profile/createProyect",
     icon: <CustomerSupport size="12px" />,
     component: <CreateP />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Recu",
+    key: "recu",
+    route: "/pas",
+    icon: <CustomerSupport size="12px" />,
+    component: <PasswordRecovery />,
     noCollapse: true,
   },
   {
