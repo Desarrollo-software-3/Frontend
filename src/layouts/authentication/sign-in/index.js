@@ -72,9 +72,9 @@ function SignIn() {
           const userData = data.user;
           console.log(userData)
           if (userData.admin){
-            setError("admon")
+            setError("  " +userData.id.toString() + " admon")
           }else{
-            setError("noadmon")
+            setError("  " +userData.id.toString() +" noadmon")
           }
         } else if (data.error) {
           // Autenticación fallida, muestra un mensaje de error
