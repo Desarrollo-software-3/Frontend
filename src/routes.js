@@ -45,6 +45,10 @@ import Profile from "layouts/profile";
 import CreateP from "layouts/Create";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+
+import PasswordRecovery from "layouts/authentication/password-recovery";
+
+
 import Editar from "layouts/Editar";
 import Editar2 from "layouts/EditarP";
 // Soft UI Dashboard React icons
@@ -133,6 +137,15 @@ const routes = [
     noCollapse:true,
   }
   ,
+  {
+    type: "collapse",
+    name: "Recu",
+    key: "recu",
+    route: "/pas",
+    icon: <CustomerSupport size="12px" />,
+    component: <PasswordRecovery />,
+    noCollapse: true,
+  },
   {
     type: "collapse",
     name: "Sign In",
