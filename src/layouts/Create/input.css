@@ -1,0 +1,35 @@
+/* Cambia el color de fondo del botón */
+input[type="file"] {
+    background-color: #007bff; /* Color de fondo azul */
+    color: #fff; /* Color del texto en el botón */
+    border: none; /* Elimina el borde si lo hubiera */
+    padding: 10px 20px; /* Ajusta el espaciado interior del botón */
+    border-radius: 5px; /* Agrega bordes redondeados al botón */
+    cursor: pointer; /* Cambia el cursor al estilo "mano" al pasar el mouse */
+  }
+  
+  /* Cambia el color de fondo del botón al pasar el mouse */
+  input[type="file"]:hover {
+    background-color: #020824dc; /* Color de fondo azul más oscuro al pasar el mouse */
+  }
+
+ .subirArch{
+  
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  background: linear-gradient(to right, #001d4be3, #000520);
+ }
+
+ .subirArch:focus {
+    transform: scale(10); /* Aumenta el tamaño en un 10% al enfocar */
+  }
+  
+  .input-file-hidden {
+    display: none;
+  }
+  
+ 
