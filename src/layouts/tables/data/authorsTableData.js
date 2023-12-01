@@ -6,9 +6,13 @@ import SoftAvatar from "components/SoftAvatar";
 import SoftBadge from "components/SoftBadge";
 
 // Images
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+import andres from "assets/images/cepeda.jpg";
+import eladio from "assets/images/eladio.jpg";
+import penyair from "assets/images/penyair.jpg";
+import taylor from "assets/images/taylor.jpg";
+import bogota from "assets/images/medellin.jpg";
+import manuel from "assets/images/manuel.jpg";
+
 
 function Artista({ image, name, tipo }) {
   return (
@@ -46,23 +50,23 @@ const artistsTableData = {
     { name: "artista", align: "left" },
     { name: "evento", align: "left" },
     { name: "status", align: "center" },
-    { name: "employed", align: "center" },
-    { name: "action", align: "center" },
+    { name: "fecha", align: "center" },
+    { name: "comprar", align: "center" },
   ],
 
   rows: [
     {
-      artista: <Artista image={team2} name="John Michael" tipo="john@creative-tim.com" />,
-      evento: <Evento job="Concierto" org="Organization" />,
+      artista: <Artista image={andres} name="Andrés Cepeda" tipo="Concierto" />,
+      evento: <Evento job="Movistar Arena" org="Bogotá" />,
       status: (
         <SoftBadge variant="gradient" badgeContent="En venta" color="success" size="xs" container />
       ),
-      employed: (
+      fecha: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          23/04/18
+          12/12/23
         </SoftTypography>
       ),
-      action: (
+      comprar: (
         <SoftTypography
           component="a"
           href="#"
@@ -75,17 +79,17 @@ const artistsTableData = {
       ),
     },
     {
-      artista: <Artista image={team3} name="Alexa Liras" tipo="alexa@creative-tim.com" />,
-      evento: <Evento job="Programator" org="Developer" />,
+      artista: <Artista image={eladio} name="Eladio Carrión" tipo="concierto" />,
+      evento: <Evento job="Diamante de Sóftbol" org="Cali" />,
       status: (
-        <SoftBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
+        <SoftBadge variant="gradient" badgeContent="SOLD OUT" color="secondary" size="xs" container />
       ),
-      employed: (
+      fecha: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          11/01/19
+          01/02/24
         </SoftTypography>
       ),
-      action: (
+      comprar: (
         <SoftTypography
           component="a"
           href="#"
@@ -98,17 +102,17 @@ const artistsTableData = {
       ),
     },
     {
-      artista: <Artista image={team4} name="Laurent Perrier" tipo="laurent@creative-tim.com" />,
-      evento: <Evento job="Executive" org="Projects" />,
+      artista: <Artista image={bogota} name="Orquesta Sinfónica Nacional de Colombia" tipo="Recital" />,
+      evento: <Evento job="Conservatorio nacional" org="Bogotá" />,
       status: (
-        <SoftBadge variant="gradient" badgeContent="online" color="success" size="xs" container />
+        <SoftBadge variant="gradient" badgeContent="En venta" color="success" size="xs" container />
       ),
-      employed: (
+      fecha: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          19/09/17
+          18/12/23
         </SoftTypography>
       ),
-      action: (
+      comprar: (
         <SoftTypography
           component="a"
           href="#"
@@ -121,17 +125,17 @@ const artistsTableData = {
       ),
     },
     {
-      artista: <Artista image={team3} name="Michael Levi" tipo="michael@creative-tim.com" />,
-      evento: <Evento job="Programator" org="Developer" />,
+      artista: <Artista image={taylor} name="Taylor Swift" tipo="Concierto" />,
+      evento: <Evento job="Estadio Nemecio Camacho 'El campín' " org="Bogotá" />,
       status: (
-        <SoftBadge variant="gradient" badgeContent="online" color="success" size="xs" container />
+        <SoftBadge variant="gradient" badgeContent="SOLD OUT" color="secondary" size="xs" container />
       ),
-      employed: (
+      fecha: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          24/12/08
+          01/08/24
         </SoftTypography>
       ),
-      action: (
+      comprar: (
         <SoftTypography
           component="a"
           href="#"
@@ -144,17 +148,17 @@ const artistsTableData = {
       ),
     },
     {
-      artista: <Artista image={team2} name="Richard Gran" tipo="richard@creative-tim.com" />,
-      evento: <Evento job="Manager" org="Executive" />,
+      artista: <Artista image={penyair} name="Penyair" tipo="Concierto" />,
+      evento: <Evento job="Estadio de Fútbol Atanasio Girardot" org="Medellín" />,
       status: (
-        <SoftBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
+        <SoftBadge variant="gradient" badgeContent="En venta" color="success" size="xs" container />
       ),
-      employed: (
+      fecha: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          04/10/21
+          05/01/24
         </SoftTypography>
       ),
-      action: (
+      comprar: (
         <SoftTypography
           component="a"
           href="#"
@@ -167,17 +171,17 @@ const artistsTableData = {
       ),
     },
     {
-      artista: <Artista image={team4} name="Miriam Eric" tipo="miriam@creative-tim.com" />,
-      evento: <Evento job="Programtor" org="Developer" />,
+      artista: <Artista image={manuel} name="Manuel Medrano" tipo="Concierto" />,
+      evento: <Evento job="Movistar Arena" org="Bogotá" />,
       status: (
-        <SoftBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
+        <SoftBadge variant="gradient" badgeContent="En venta" color="success" size="xs" container />
       ),
-      employed: (
+      fecha: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          14/09/20
+          17/01/23
         </SoftTypography>
       ),
-      action: (
+      comprar: (
         <SoftTypography
           component="a"
           href="#"
