@@ -56,7 +56,7 @@ function SignIn() {
 
   const handleSignIn = () => {
     // Realiza una solicitud POST al backend Django para autenticar al usuario
-    fetch('http://127.0.0.1:8000/api/login/', {
+    fetch('http://127.0.0.1:9000/api/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,13 +70,17 @@ function SignIn() {
           // Inicio de sesión exitoso, podrías redirigir al usuario a otra página
           // alert(data.message);
           const userData = data.user;
-          console.log(userData)
+          // console.log(userData)
           if (userData.admin){
             setError("  " +userData.id.toString() + " admon")
           }else{
             setError("  " +userData.id.toString() +" noadmon")
           }
-          alert(data.message)
+          // alert(data.message)
+          document.cookie = document.cookie = `emailA=${userData.email}; path=/;`;
+          console.log(document.cookie);
+          
+          window.location.href = data.redirect_url;
         } else if (data.error) {
           // Autenticación fallida, muestra un mensaje de error
           alert('Credenciales erroneas')
@@ -112,17 +116,6 @@ function SignIn() {
             </SoftTypography>
           </SoftBox> 
           <SoftInput type="password" name="password" placeholder="Password" onChange={handleInputChange}/>
-        </SoftBox>
-        <SoftBox display="flex" alignItems="center">
-          <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-          <SoftTypography
-            variant="button"
-            fontWeight="regular"
-            onClick={handleSetRememberMe}
-            sx={{ cursor: "pointer", userSelect: "none" }}
-          >
-            &nbsp;&nbsp;Remember me
-          </SoftTypography>
         </SoftBox>
         <SoftBox mt={4} mb={1}>
           <SoftButton variant="gradient" color="info" fullWidth onClick={handleSignIn}>

@@ -60,8 +60,12 @@ function Overview() {
       });
   }, []);
  /**/
+ const emailCookie = document.cookie.split(';').find(cookie => cookie.includes('emailA'));
+const userEmail = emailCookie ? emailCookie.split('=')[1] : null;
+
+console.log(userEmail);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/obtener_usuario/?correo=azteca.integrador@gmail.com")
+    fetch("http://127.0.0.1:8000/obtener_usuario/?correo="+userEmail)
       .then((response) => response.json())
       .then((data) => {
         console.log("Datos obtenidos:", data); // Verifica los datos obtenidos
