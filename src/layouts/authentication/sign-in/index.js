@@ -70,7 +70,6 @@ function SignIn() {
           // Inicio de sesión exitoso, podrías redirigir al usuario a otra página
           // alert(data.message);
           const userData = data.user;
-          // console.log(userData)
           if (userData.admin){
             setError("  " +userData.id.toString() + " admon")
           }else{
@@ -78,7 +77,7 @@ function SignIn() {
           }
           // alert(data.message)
           document.cookie = document.cookie = `emailA=${userData.email}; path=/;`;
-          console.log(document.cookie);
+          document.cookie = document.cookie = `adminA=${userData.admin}; path=/;`;
           
           window.location.href = data.redirect_url;
         } else if (data.error) {

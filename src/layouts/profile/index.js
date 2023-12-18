@@ -62,8 +62,9 @@ function Overview() {
  /**/
  const emailCookie = document.cookie.split(';').find(cookie => cookie.includes('emailA'));
 const userEmail = emailCookie ? emailCookie.split('=')[1] : null;
+const adminCookie = document.cookie.split(';').find(cookie => cookie.includes('adminA'));
+const userAdmin = adminCookie ? adminCookie.split('=')[1] : null;
 
-console.log(userEmail);
   useEffect(() => {
     fetch("http://127.0.0.1:8000/obtener_usuario/?correo="+userEmail)
       .then((response) => response.json())
@@ -205,7 +206,8 @@ console.log(userEmail);
             />
           </Grid>
         ))}
-         <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
+         {userAdmin == "true" ? (<PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
+          ) : null}
 
       </Grid>{/*<Grid item xs={12} md={6} xl={3}>
           <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
