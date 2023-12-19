@@ -9,7 +9,7 @@ const emailCookie = document.cookie.split(';').find(cookie => cookie.includes('e
 const userEmail = emailCookie ? emailCookie.split('=')[1] : null;
 
 const URL="http://localhost:5000/fetch/"+userEmail
-const URLE=" http://34.173.217.164/"
+
 
 
 function Cart(){
@@ -35,12 +35,13 @@ function Cart(){
         .catch((error)=>{
             console.error('Error al obtener los productos', error);
         })
+        console.log("----------")
         console.log(list)
 
 
     },[])
     useEffect(() => {
-        fetch("http://34.173.217.164/eventoscreados")
+        fetch("http://34.170.199.27/eventoscreados")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Error al obtener los eventos creados');
