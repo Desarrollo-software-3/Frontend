@@ -8,14 +8,12 @@ import SoftTypography from "components/SoftTypography";
 import SoftProgress from "components/SoftProgress";
 
 // Images
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoWebDev from "assets/images/small-logos/logo-webdev.svg";
-import logoXD from "assets/images/small-logos/logo-xd.svg";
+import logoTeatro from "assets/images/small-logos/teatro.svg";
+import logoFutbol from "assets/images/small-logos/futbol.svg";
+import logoVino from "assets/images/small-logos/vino.svg";
+import logoCultura from "assets/images/small-logos/cultura.svg";
 
-function Completion({ value, color }) {
+function Disponibilidad({ value, color }) {
   return (
     <SoftBox display="flex" alignItems="center">
       <SoftTypography variant="caption" color="text" fontWeight="medium">
@@ -28,113 +26,113 @@ function Completion({ value, color }) {
   );
 }
 
-const action = (
+const comprar = (
   <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small">
     more_vert
   </Icon>
 );
 
-const projectsTableData = {
+const eventosTableData = {
   columns: [
-    { name: "project", align: "left" },
-    { name: "budget", align: "left" },
+    { name: "evento", align: "left" },
+    { name: "precio", align: "left" },
     { name: "status", align: "left" },
-    { name: "completion", align: "center" },
-    { name: "action", align: "center" },
+    { name: "disponibilidad", align: "center" },
+    { name: "comprar", align: "center" },
   ],
 
   rows: [
     {
-      project: [logoSpotify, "Spotift"],
-      budget: (
+      evento: [logoFutbol, "Millonarios vs América"],
+      precio: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          $2,500
+          $150
         </SoftTypography>
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          working
+          En venta
         </SoftTypography>
       ),
-      completion: <Completion value={60} color="info" />,
-      action,
+      disponibilidad: <Disponibilidad value={60} color="info" />,
+      comprar,
     },
     {
-      project: [logoInvesion, "Invesion"],
-      budget: (
+      evento: [logoTeatro, "El cisne negro"],
+      precio: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          $5,000
+          $75
         </SoftTypography>
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          done
+          En venta
         </SoftTypography>
       ),
-      completion: <Completion value={100} color="success" />,
-      action,
+      disponibilidad: <Disponibilidad value={100} color="success" />,
+      comprar,
     },
     {
-      project: [logoJira, "Jira"],
-      budget: (
+      evento: [logoTeatro, "Romeo y Julieta"],
+      precio: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          $3,400
+          $35
         </SoftTypography>
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          canceled
+          Últimas boletas
         </SoftTypography>
       ),
-      completion: <Completion value={30} color="error" />,
-      action,
+      disponibilidad: <Disponibilidad value={30} color="error" />,
+      comprar,
     },
     {
-      project: [logoSlack, "Slack"],
-      budget: (
+      evento: [logoFutbol, "Nacional vs D.I.M"],
+      precio: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          $1,400
+          $180
         </SoftTypography>
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          canceled
+          SOLD OUT
         </SoftTypography>
       ),
-      completion: <Completion value={0} color="error" />,
-      action,
+      disponibilidad: <Disponibilidad value={0} color="error" />,
+      comprar,
     },
     {
-      project: [logoWebDev, "Webdev"],
-      budget: (
+      evento: [logoVino, "Cata de vinos Cali"],
+      precio: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          $14,000
+          $20
         </SoftTypography>
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          working
+          En venta
         </SoftTypography>
       ),
-      completion: <Completion value={80} color="info" />,
-      action,
+      disponibilidad: <Disponibilidad value={80} color="info" />,
+      comprar,
     },
     {
-      project: [logoXD, "Adobe XD"],
-      budget: (
+      evento: [logoCultura, "Festival cultural Ucraniano"],
+      precio: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          $2,300
+          $10
         </SoftTypography>
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          done
+          En venta
         </SoftTypography>
       ),
-      completion: <Completion value={100} color="success" />,
-      action,
+      disponibilidad: <Disponibilidad value={100} color="success" />,
+      comprar,
     },
   ],
 };
 
-export default projectsTableData;
+export default eventosTableData;
