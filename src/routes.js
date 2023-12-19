@@ -38,9 +38,6 @@ Coded by www.creative-tim.com
 // Soft UI Dashboard React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import VirtualReality from "layouts/virtual-reality";
-import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import CreateP from "layouts/Create";
 import SignIn from "layouts/authentication/sign-in";
@@ -54,12 +51,9 @@ import Editar2 from "layouts/EditarP";
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
 import Office from "examples/Icons/Office";
-import Settings from "examples/Icons/Settings";
 import Document from "examples/Icons/Document";
 import SpaceShip from "examples/Icons/SpaceShip";
 import CustomerSupport from "examples/Icons/CustomerSupport";
-import CreditCard from "examples/Icons/CreditCard";
-import Cube from "examples/Icons/Cube";
 import Cart from "layouts/cart";
 
 const routes = [
@@ -81,37 +75,11 @@ const routes = [
     component: <Tables />,
     noCollapse: true,
   },
-  {
-    type: "collapse",
-    name: "Billing",
-    key: "billing",
-    route: "/billing",
-    icon: <CreditCard size="12px" />,
-    component: <Billing />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Virtual Reality",
-    key: "virtual-reality",
-    route: "/virtual-reality",
-    icon: <Cube size="12px" />,
-    component: <VirtualReality />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    route: "/rtl",
-    icon: <Settings size="12px" />,
-    component: <RTL />,
-    noCollapse: true,
-  },
+
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",
-    name: "Profile",
+    name: "Perfil",
     key: "profile",
     route: "/profile",
     icon: <CustomerSupport size="12px" />,
@@ -120,7 +88,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "CreateProyect",
+    name: "Crear evento",
     key: "createProyect",
     route: "/profile/createProyect",
     icon: <CustomerSupport size="12px" />,
@@ -129,7 +97,7 @@ const routes = [
   },
   {
     type:"collapse",
-    name:"Cart",
+    name:"Carrito",
     key:"cart",
     route:"/cart",
     icon:<CustomerSupport size="12px" />,
@@ -139,7 +107,7 @@ const routes = [
   ,
   {
     type: "collapse",
-    name: "Recu",
+    name: "Recuperar contraseña",
     key: "recu",
     route: "/pas",
     icon: <CustomerSupport size="12px" />,
@@ -148,7 +116,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Sign In",
+    name: "Iniciar sesión",
     key: "sign-in",
     route: "/authentication/sign-in",
     icon: <Document size="12px" />,

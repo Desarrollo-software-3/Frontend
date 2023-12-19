@@ -92,8 +92,8 @@ function SignIn() {
   return (
     
     <CoverLayout
-      title="Welcome back"
-      description="Enter your email and password to sign in"
+      title="Bienvenido"
+      description="Ingresa tu Email y contraseña para iniciar sesión"
       image={curved9}
     >
       <SoftBox component="form" role="form">
@@ -108,7 +108,7 @@ function SignIn() {
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
             <SoftTypography component="label" variant="caption" fontWeight="bold" name="password" >
-              Password
+              contraseña
             </SoftTypography>
           </SoftBox> 
           <SoftInput type="password" name="password" placeholder="Password" onChange={handleInputChange}/>
@@ -121,28 +121,26 @@ function SignIn() {
             onClick={handleSetRememberMe}
             sx={{ cursor: "pointer", userSelect: "none" }}
           >
-            &nbsp;&nbsp;Remember me
+            &nbsp;&nbsp;Recuerdame
           </SoftTypography>
         </SoftBox>
         <SoftBox mt={4} mb={1}>
           <SoftButton variant="gradient" color="info" fullWidth onClick={handleSignIn}>
-            sign in
+            Iniciar sesión
           </SoftButton>
         </SoftBox>
         <SoftBox mt={3} textAlign="center">
-          <SoftTypography variant="button" color="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
             <SoftTypography
               component={Link}
-              to="/authentication/sign-up"
+              to="/pas"
               variant="button"
               color="info"
               fontWeight="medium"
               textGradient
             >
-              Sign up
+              Olvidaste tu contraseña?
             </SoftTypography>
-          </SoftTypography>
+
         </SoftBox>
       </SoftBox>
     </CoverLayout>
