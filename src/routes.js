@@ -36,15 +36,12 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard React layouts
-import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Profile from "layouts/profile";
 import CreateP from "layouts/Create";
 import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
 
 import PasswordRecovery from "layouts/authentication/password-recovery";
-
 
 import Editar from "layouts/Editar";
 import Editar2 from "layouts/EditarP";
@@ -57,15 +54,6 @@ import CustomerSupport from "examples/Icons/CustomerSupport";
 import Cart from "layouts/cart";
 
 const routes = [
-  {
-    type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
-    route: "/dashboard",
-    icon: <Shop size="12px" />,
-    component: <Dashboard />,
-    noCollapse: true,
-  },
   {
     type: "collapse",
     name: "Tables",
@@ -96,15 +84,14 @@ const routes = [
     noCollapse: true,
   },
   {
-    type:"collapse",
-    name:"Carrito",
-    key:"cart",
-    route:"/cart",
-    icon:<CustomerSupport size="12px" />,
-    component:<Cart/>,
-    noCollapse:true,
-  }
-  ,
+    type: "collapse",
+    name: "Carrito",
+    key: "cart",
+    route: "/cart",
+    icon: <CustomerSupport size="12px" />,
+    component: <Cart />,
+    noCollapse: true,
+  },
   {
     type: "collapse",
     name: "Recuperar contraseña",
@@ -124,17 +111,6 @@ const routes = [
     noCollapse: true,
   },
   {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    route: "/authentication/sign-up",
-    icon: <SpaceShip size="12px" />,
-    component: <SignUp />,
-    noCollapse: true,
-  },
-  {
-    
-    
     route: "/editar/:id",
     icon: <SpaceShip size="12px" />,
     component: <Editar />,
@@ -142,14 +118,11 @@ const routes = [
   },
 
   {
-    
-    
     route: "/editarp/:id",
     icon: <SpaceShip size="12px" />,
     component: <Editar2 />,
     noCollapse: true,
   },
- 
 ];
 
 export default routes;
