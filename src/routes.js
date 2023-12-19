@@ -56,7 +56,7 @@ import Cart from "layouts/cart";
 const routes = [
   {
     type: "collapse",
-    name: "Tables",
+    name: "Eventos",
     key: "tables",
     route: "/tables",
     icon: <Office size="12px" />,
