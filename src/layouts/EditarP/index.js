@@ -71,7 +71,7 @@ function Editar2() {
 
 
  useEffect(() => {
-    fetch(`http://localhost:4000/eventT/${id}`) // Utiliza la interpolación para incluir el ID dinámicamente
+    fetch(`http://34.27.62.120/eventT/${id}`) // Utiliza la interpolación para incluir el ID dinámicamente
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // Corrección en el uso de console.log
