@@ -55,7 +55,7 @@ function SignIn() {
   const handleSignIn = () => {
     // Realiza una solicitud POST al backend Django para autenticar al usuario
     console.log(formData)
-    fetch('https://35.238.0.31/api/login', {
+    fetch('https://34.118.238.69/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
