@@ -43,7 +43,7 @@ function SidenavCard() {
     <Card sx={(theme) => card(theme, { miniSidenav })}>
       <SoftButton
             component={Link}
-            href=""
+            href="https://frontend-atardecer01-s-team.vercel.app/authentication/sign-in"
             target="_blank"
             rel="noreferrer"
             size="small"
