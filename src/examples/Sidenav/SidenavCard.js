@@ -44,7 +44,6 @@ function SidenavCard() {
       <SoftButton
             component={Link}
             href="/authentication/sign-in"
-            target="_blank"
             rel="noreferrer"
             size="small"
             color="light"
