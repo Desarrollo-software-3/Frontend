@@ -41,7 +41,7 @@ function Cart(){
 
     },[])
     useEffect(() => {
-        fetch("http://34.170.199.27/eventoscreados")
+        fetch("http://34.27.62.120/eventoscreados")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Error al obtener los eventos creados');
