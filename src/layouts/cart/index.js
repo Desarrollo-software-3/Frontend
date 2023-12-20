@@ -72,15 +72,15 @@ function Cart(){
             </div>
             <div className="card-group">
                 {filtrados.map(evento=>(
-                    <div className="card" key={evento._id} style={{ border: '2px solid black',borderRadius: '5%', padding: '10px', margin: '10px' }}>
+                    <div className="card" key={evento._id} style={{ border: '2px solid black',borderRadius: '5%', padding: '10px', margin: '10px', width:"50%" }}>
                         <center>
                         <img src={evento.imagen} alt={evento.titulo} />
                         <h3>{evento.titulo}</h3>
-                        <p>Ubicación: {evento.ubicacion}</p>
-                        <p>Fecha de Inicio: {evento.fechaInicio}</p>
-                        <p>Fecha de Fin: {evento.fechaFin}</p>
-                        <p>Precio: {evento.precio}</p>
-                        <p>Cantidad de Boletos: {evento.cantidadBoletos}</p>
+                        <p><b>Ubicación:</b> {evento.ubicacion}</p>
+                        <p><b>Fecha de Inicio: </b>{evento.fechaInicio}</p>
+                        <p><b>Fecha de Fin: </b>{evento.fechaFin}</p>
+                        <p><b>Precio: </b>{evento.precio}</p>
+                        <p><b>Cantidad de Boletos: </b>{evento.cantidadBoletos}</p>
                         <div className="author align-items-center">
                             <SoftButton>Delete</SoftButton>
                         </div>
