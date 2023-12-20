@@ -170,6 +170,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   >
                     Sign in
                   </SoftTypography>
+                  
                 </IconButton>
               </Link>
               <IconButton

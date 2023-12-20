@@ -111,6 +111,7 @@ function DefaultNavbar({ transparent, light, action }) {
             route="/authentication/sign-in"
             light={light}
           />
+          
         </SoftBox>
         {action &&
           (action.type === "internal" ? (

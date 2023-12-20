@@ -37,7 +37,7 @@ import curved9 from "assets/images/curved-images/logo.png";
 function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState('');
-
+  const [email, setEmail] = useState('');
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const [formData, setFormData] = useState({
     email: "",
@@ -56,7 +56,7 @@ function SignIn() {
 
   const handleSignIn = () => {
     // Realiza una solicitud POST al backend Django para autenticar al usuario
-    fetch('http://127.0.0.1:8000/api/login/', {
+    fetch('http://login-dsiii.vercel.app/api/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +87,6 @@ function SignIn() {
         console.error('Error al realizar la solicitud:', error);
       });
   };
-  
 
   return (
     
@@ -99,7 +98,7 @@ function SignIn() {
       <SoftBox component="form" role="form">
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold" name="email" >
+            <SoftTypography component="label" variant="caption" fontWeight="bold" name="email" onChange={(e) => setEmail(e.target.value)}>
               Email{error}
             </SoftTypography>
           </SoftBox>

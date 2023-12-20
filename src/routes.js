@@ -72,7 +72,7 @@ const routes = [
     component: <Dashboard />,
     noCollapse: true,
   },
-  {
+ /* {
     type: "collapse",
     name: "Tables",
     key: "tables",
@@ -107,7 +107,7 @@ const routes = [
     icon: <Settings size="12px" />,
     component: <RTL />,
     noCollapse: true,
-  },
+  },*/
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",
