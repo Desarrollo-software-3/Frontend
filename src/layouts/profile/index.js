@@ -46,7 +46,7 @@ function Overview() {
   };
   useEffect(() => {
     // Realizar la solicitud GET al servidor para obtener la lista de eventos
-    fetch("http://34.170.199.27/eventoscreados") // Asegúrate de usar la URL correcta
+    fetch("http://34.27.62.120/eventoscreados") // Asegúrate de usar la URL correcta
       .then((response) => response.json())
       .then((data) => {
         // Los datos de eventos se almacenan en el estado
