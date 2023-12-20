@@ -41,11 +41,12 @@ function Overview() {
   const formatDate = (dateStr) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     const date = new Date(dateStr);
+   
     return date.toLocaleDateString("es-ES", options);
   };
   useEffect(() => {
     // Realizar la solicitud GET al servidor para obtener la lista de eventos
-    fetch("http://localhost:4000/eventoscreados") // Asegúrate de usar la URL correcta
+    fetch("http://34.170.199.27/eventoscreados") // Asegúrate de usar la URL correcta
       .then((response) => response.json())
       .then((data) => {
         // Los datos de eventos se almacenan en el estado
@@ -56,15 +57,20 @@ function Overview() {
       });
   }, []);
   /**/
+  const emailCookie = document.cookie.split(';').find(cookie => cookie.includes('emailA'));
+  const userEmail = emailCookie ? emailCookie.split('=')[1] : null;
+  const adminCookie = document.cookie.split(';').find(cookie => cookie.includes('roleA'));
+  const userAdmin = adminCookie ? adminCookie.split('=')[1] : null;
+  const URLA =  "http://127.0.0.1:8000/obtener_usuario/?correo="+userEmail
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/obtener_usuario/?correo=azteca.integrador@gmail.com")
+    fetch(URLA)
       .then((response) => response.json())
       .then((data) => {
         console.log("Datos obtenidos:", data); // Verifica los datos obtenidos
         setUsu(data);
       })
       .catch((error) => {
-        console.error("Error al obtener la lista de eventos:", error);
+        console.error("Error al obtener usuario:", error);
       });
   }, []);
 
@@ -103,11 +109,8 @@ function Overview() {
   return (
     <DashboardLayout>
       <Header lista={usu} />
-      <SoftBox mt={5} mb={2}>
-        <Grid container spacing={2}>
-          {/*  <Grid item xs={12} md={6} xl={4}>
-            <PlatformSettings />
-  </Grid>*/}
+      <SoftBox mt={1} mb={2}> 
+        <Grid container spacing={1} >
           <Grid item xs={12} md={6} xl={4}>
             <ProfileInfoCard
               title="INFORMACION PERSONAL"
@@ -140,13 +143,10 @@ function Overview() {
               ]}
               action={{ route: "", tooltip: "Edit Profile" }}
             />
-          </Grid>
-          <Grid item xs={12} xl={4}>
-            <ProfilesList title="conversations" profiles={profilesListData} />
           </Grid>{" "}
-          {/**/}
         </Grid>
       </SoftBox>
+      
       <SoftBox mb={3}>
         <Card>
           <SoftBox pt={2} px={2}>
@@ -155,13 +155,6 @@ function Overview() {
               {/* Estableciendo un margen común para todos los SoftBox dentro */}
               <SoftTypography variant="h6" fontWeight="medium">
                 {usu.nombre}
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mb={3}>
-              {" "}
-              {/* Estableciendo un margen común para todos los SoftBox dentro */}
-              <SoftTypography variant="button" fontWeight="regular" color="text">
-                Architects design houses
               </SoftTypography>
             </SoftBox>
           </SoftBox>
@@ -190,8 +183,11 @@ function Overview() {
                   />
                 </Grid>
               ))}
-              <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
+              
             </Grid>
+            {userAdmin == "admin" ? (
+                  <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
+          ) : null}
             {/*<Grid item xs={12} md={6} xl={3}>
           <PlaceholderCard title={{ variant: "h10", text: "NUEVO EVENTO" }} outlined />
             </Grid>*/}

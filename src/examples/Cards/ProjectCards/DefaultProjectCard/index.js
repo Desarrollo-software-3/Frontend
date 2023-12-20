@@ -47,7 +47,7 @@ function DefaultProjectCard({ image, label, title, description ,lugar, action ,i
   
     if (confirmarEliminar) {
       // Si el usuario confirma la eliminación, enviar la solicitud DELETE
-      fetch(`http://localhost:4000/eventos/${eventoId}`, { method: 'DELETE' })
+      fetch(`http://34.170.199.27/eventos/${eventoId}`, { method: 'DELETE' })
         .then((response) => response.json())
         .then((data) => {
           // Mostrar un mensaje de éxito o realizar otras acciones necesarias
@@ -78,20 +78,25 @@ function DefaultProjectCard({ image, label, title, description ,lugar, action ,i
         backgroundColor: "transparent",
         boxShadow: "none",
         overflow: "visible",
+        border: "1px solid black", // Añade un borde negro
+        borderRadius: "8px", // Ajusta el radio de borde según sea necesario
+        padding: "20px",
+        margin:"5px"
       }}
     >
-      <SoftBox position="relative" width="400px" shadow="xs" borderRadius="xl">
+      <SoftBox position="relative" width="100%" shadow="xs" borderRadius="xl" >
         <CardMedia
           src={image}
           component="img"
           title={title}
           sx={{
-            maxWidth: "400px",
-            maxHeight :"400px",
+            maxWidth: "100%",
+            maxHeight :"100%",
             margin: 0,
             boxShadow: ({ boxShadows: { md } }) => md,
             objectFit: "cover",
             objectPosition: "center",
+            
           }}
         />
       </SoftBox>

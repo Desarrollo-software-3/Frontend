@@ -37,21 +37,7 @@ function PlaceholderCard({ icon, title, hasBorder, outlined }) {
         overflow: "visible",
       }}
     >
-      <SoftBox position="relative" width="400px" shadow="xs" borderRadius="xl">
-        <CardMedia
-          src={'https://us.123rf.com/450wm/sumberejeki/sumberejeki2007/sumberejeki200703075/151819268-vectores-gr%C3%A1fico-vectorial-del-icono-de-la-barra-de-carga-apto-para-el-progreso-la-interfaz-el.jpg?ver=6'}
-          component="img"
-          title={''}
-          sx={{
-            maxWidth: "300px",
-            maxHeight :"400px",
-            margin: 0,
-            boxShadow: ({ boxShadows: { md } }) => md,
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-        />
-      </SoftBox>
+      
 
            
 
