@@ -116,7 +116,7 @@ function CreateP() {
     console.log(imagen)
     e.preventDefault();
     
-    axios.post("http://localhost:4000/api/proyect", {imagen, 
+    axios.post("http://34.27.62.120/api/proyect", {imagen, 
     titulo, ubicacion,fechaInicio,fechaFin,precio,
     cantidadBoletos, descripcion, creacionF})
     .then(async () => {
