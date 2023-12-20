@@ -49,7 +49,7 @@ function Editar() {
   const [eventos, setEventos] = useState([]);
   
   useEffect(() => {
-    fetch(`http://localhost:4000/eventT/${id}`) // Utiliza la interpolación para incluir el ID dinámicamente
+    fetch(`http://34.27.62.120/eventT/${id}`) // Utiliza la interpolación para incluir el ID dinámicamente
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // Corrección en el uso de console.log
@@ -135,7 +135,7 @@ function Editar() {
     console.log(imagen)
     e.preventDefault();
     
-    axios.post(`http://localhost:4000/editar/${id}`, {imagen, 
+    axios.post(`http://34.27.62.120/editar/${id}`, {imagen, 
     titulo, ubicacion,fechaInicio,fechaFin,precio,
     cantidadBoletos, descripcion, creacionF})
     .then(async () => {
